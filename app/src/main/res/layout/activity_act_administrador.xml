@@ -4,25 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBlanco"
-    tools:context=".MainActivity">
+    tools:context=".actAdministrador">
 
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar"></include>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/menu_abajo"
+        android:id="@+id/menu_admin"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="#FFFFFF"
         android:elevation="20sp"
         app:itemIconTint="@color/color_menu_abajo"
         app:itemTextColor="@color/color_menu_abajo"
+        app:labelVisibilityMode="selected"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_abajo"
+        app:menu="@menu/menu_admin"
         tools:ignore="MissingConstraints" />
 
     <FrameLayout

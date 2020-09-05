@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/frgDenunciasA"
+        android:icon="@drawable/icon_denuncias"
+        android:title="Denuncias"
+        />
+
+    <item
+        android:id="@+id/frgUsuarioA"
+        android:icon="@drawable/icon_usuario"
+        android:title="Usuario" />
+</menu>

@@ -6,77 +6,51 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class actAdministrador extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_act_administrador);
 
         // Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
-        BottomNavigationView menu_abajo = findViewById(R.id.menu_abajo);
 
-
-        Fragment selectedFragment = new frgInicio();
+        BottomNavigationView menu = findViewById(R.id.menu_admin);
+        Fragment selectedFragment = new frgInicioAdmin();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragments,selectedFragment);
         fragmentTransaction.commit();
 
-        menu_abajo.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment selectedFragment = null;
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 switch (item.getItemId()) {
-                    case R.id.frgDenuncias:
-                        selectedFragment = new frgInicio();
+                    case R.id.frgDenunciasA:
+                        selectedFragment = new frgInicioAdmin();
                         fragmentTransaction.replace(R.id.fragments,selectedFragment);
                         fragmentTransaction.commit();
                         break;
 
-                    case R.id.frgCrear:
-                        selectedFragment = new frgCrear();
-                        fragmentTransaction.replace(R.id.fragments,selectedFragment);
-                        fragmentTransaction.commit();
-                        break;
-
-                    case R.id.frgNotificaciones:
-                        selectedFragment = new frgNotificaciones();
-                        fragmentTransaction.replace(R.id.fragments,selectedFragment);
-                        fragmentTransaction.commit();
-                        break;
-
-                    case R.id.frgUsuario:
+                    case R.id.frgUsuarioA:
                         selectedFragment = new frgUsuario();
                         fragmentTransaction.replace(R.id.fragments,selectedFragment);
                         fragmentTransaction.commit();
                         break;
                 }
-              return true;
+                return true;
             }
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return true;
-    }
-
-    public void cambioFragment()
-    {
-        FragmentManager manager = getSupportFragmentManager();
-
     }
 }

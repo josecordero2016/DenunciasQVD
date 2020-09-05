@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/frgInicio"
-        android:icon="@drawable/icon_inicio"
-        android:title="Inicio"
+        android:id="@+id/frgDenuncias"
+        android:icon="@drawable/icon_denuncias"
+        android:title="Denuncias"
         />
     <item
-        android:id="@+id/frgFavoritos"
-        android:icon="@drawable/icon_favoritos"
-        android:title="Favoritos" />
+        android:id="@+id/frgCrear"
+        android:icon="@drawable/icon_agregar"
+        android:title="Crear" />
     <item
-        android:id="@+id/frgMiscompras"
-        android:icon="@drawable/icon_miscompras"
-        android:title="Mis compras" />
+        android:id="@+id/frgNotificaciones"
+        android:icon="@drawable/icon_notificaciones"
+        android:title="Notificaciones" />
     <item
         android:id="@+id/frgUsuario"
         android:icon="@drawable/icon_usuario"

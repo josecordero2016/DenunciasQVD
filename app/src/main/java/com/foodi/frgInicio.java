@@ -51,10 +51,8 @@ public class frgInicio extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_frg_inicio, container, false);
-        ImageView imgDestacado = view.findViewById(R.id.imgDestacado);
-        Glide.with(this).load("https://i.ibb.co/h7FvrkF/destpro.gif").into(imgDestacado);
-        TextView lblDestacado = view.findViewById(R.id.lblDestacado);
-        lblDestacado.setText("Parrilladas del toro");
+
+
 
         rclPopulares = (RecyclerView) view.findViewById(R.id.rclPopulares);
         LinearLayoutManager linear = new LinearLayoutManager(getActivity().getApplicationContext());
