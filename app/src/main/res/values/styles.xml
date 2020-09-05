@@ -1,0 +1,23 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorStatus</item>
+        <item name="colorPrimaryDark">@color/colorStatus</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+
+        <!--La barra de navegación de color blanco-->
+        <item name="android:navigationBarColor">@color/colorBlanco</item>
+        <item name="android:navigationBarDividerColor" tools:targetApi="o_mr1">#FFFFFF</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <!--Color del ripple-->
+        <item name="colorControlHighlight">@color/colorRipple</item>
+    </style>
+
+    <!--Eliminando el ActionBar-->
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+</resources>

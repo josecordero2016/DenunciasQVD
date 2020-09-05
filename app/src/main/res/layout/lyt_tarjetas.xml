@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="200dp"
+        android:layout_height="235dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginBottom="6dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="2dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/txtNombrerestaurante"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="158dp"
+                android:layout_marginEnd="2dp"
+                android:text="Restaurante de Victor"
+                android:textAlignment="center"
+                android:textColor="@color/colorNaranja"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="120dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/imagenejemplo" />
+
+            <TextView
+                android:id="@+id/txtNombrePlatillo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="131dp"
+                android:layout_marginEnd="-1dp"
+                android:text="Sopa de pato con carne"
+                android:textAlignment="center"
+                android:textColor="#2E2E2E" />
+
+            <Button
+                android:id="@+id/btnRestaurant"
+                android:layout_width="90dp"
+                android:layout_height="31dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="54dp"
+                android:layout_marginTop="187dp"
+                android:layout_marginEnd="56dp"
+                android:background="@drawable/lyt_bordesredondos"
+                android:backgroundTint="@color/colorNaranja"
+                android:text="ORDENAR"
+                android:textColor="#FFFFFF" />
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>
