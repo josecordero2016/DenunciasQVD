@@ -51,16 +51,12 @@ public class frgInicio extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_frg_inicio, container, false);
-
-
-
         rclPopulares = (RecyclerView) view.findViewById(R.id.rclPopulares);
         LinearLayoutManager linear = new LinearLayoutManager(getActivity().getApplicationContext());
         linear.setOrientation(LinearLayoutManager.VERTICAL);
         rclPopulares.setLayoutManager(linear);
         adt_populares adt_populares = new adt_populares();
         rclPopulares.setAdapter(adt_populares);
-
         return view;
     }
 }
