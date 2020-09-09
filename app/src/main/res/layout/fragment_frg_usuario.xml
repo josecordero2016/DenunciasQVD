@@ -1,14 +1,287 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".frgUsuario">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Usuario" />
+        android:orientation="vertical">
+        <!-- TODO: Update blank fragment layout -->
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"
+
+           />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="125dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="2dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="1dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/txtUsuario"
+                        android:layout_width="117dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginEnd="6dp"
+                        android:background="@drawable/lyt_bordesredondos"
+                        android:backgroundTint="#FFFFFF"
+                        android:text="Pao"
+                        android:textColor="@color/colorGris"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/lblUsuario" /> />
+
+                    <ImageView
+                        android:id="@+id/imageViewTelefono"
+                        android:layout_width="17dp"
+                        android:layout_height="16dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="5dp"
+                        app:layout_constraintEnd_toStartOf="@+id/lblTelefono"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/icon_telefono"
+                        app:tint="@color/colorPrimary" />
+
+                    <TextView
+                        android:id="@+id/lblTelefono"
+                        android:layout_width="66dp"
+                        android:layout_height="17dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="36dp"
+                        android:background="@drawable/lyt_bordesredondos"
+                        android:backgroundTint="#FFFFFF"
+                        android:text="Teléfono:"
+                        android:textAlignment="textStart"
+                        android:textColor="#303030"
+                        android:textSize="12dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txtTelefono"
+                        android:layout_width="117dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginEnd="6dp"
+                        android:background="@drawable/lyt_bordesredondos"
+                        android:backgroundTint="#FFFFFF"
+                        android:text="0980172233"
+                        android:textColor="@color/colorGris"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/lblNombre" />
+
+                    <ImageView
+                        android:id="@+id/imageViewUsuario"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_margin="2dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintEnd_toStartOf="@+id/lblUsuario"
+                        app:layout_constraintTop_toBottomOf="@+id/txtTelefono"
+                        app:srcCompat="@drawable/icon_user"
+                        app:tint="@color/colorPrimary" />
+
+                    <TextView
+                        android:id="@+id/lblUsuario"
+                        android:layout_width="68dp"
+                        android:layout_height="16dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="36dp"
+                        android:background="@drawable/lyt_bordesredondos"
+                        android:backgroundTint="#FFFFFF"
+                        android:text="Usuario:"
+                        android:textColor="#303030"
+                        android:textSize="12dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txtTelefono" />
+
+                    <TextView
+                        android:id="@+id/txtNombre"
+                        android:layout_width="187dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:background="@drawable/lyt_bordesredondos"
+                        android:backgroundTint="#FFFFFF"
+                        android:text="Paola"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/colorGris"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toEndOf="@+id/imageViewNombre"
+                        app:layout_constraintTop_toBottomOf="@+id/lblNombre" />
+
+                    <ImageView
+                        android:id="@+id/imageViewNombre"
+                        android:layout_width="16dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="2dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/lblNombre"
+                        app:srcCompat="@drawable/icon_name"
+                        app:tint="@color/colorPrimary" />
+
+                    <TextView
+                        android:id="@+id/lblNombre"
+                        android:layout_width="120dp"
+                        android:layout_height="16dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/lyt_bordesredondos"
+                        android:backgroundTint="#FFFFFF"
+                        android:text="Nombre:"
+                        android:textColor="#303030"
+                        android:textSize="12dp"
+                        app:layout_constraintStart_toEndOf="@+id/imageViewNombre"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txtEmail"
+                        android:layout_width="187dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:background="@drawable/lyt_bordesredondos"
+                        android:backgroundTint="#FFFFFF"
+                        android:text="Paola"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/colorGris"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="@+id/lblEmail"
+                        app:layout_constraintTop_toBottomOf="@+id/lblEmail" />
+
+                    <TextView
+                        android:id="@+id/lblEmail"
+                        android:layout_width="67dp"
+                        android:layout_height="17dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:background="@drawable/lyt_bordesredondos"
+                        android:backgroundTint="#FFFFFF"
+                        android:text="Correo:"
+                        android:textColor="#303030"
+                        android:textSize="12dp"
+                        app:layout_constraintStart_toEndOf="@+id/imageViewEmail"
+                        app:layout_constraintTop_toBottomOf="@+id/txtNombre" />
+
+                    <ImageView
+                        android:id="@+id/imageViewEmail"
+                        android:layout_width="16dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="2dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/lblEmail"
+                        app:srcCompat="@drawable/icon_email"
+                        app:tint="@color/colorPrimary" />
+
+                    <TextView
+                        android:id="@+id/lblUbicacion"
+                        android:layout_width="67dp"
+                        android:layout_height="17dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:background="@drawable/lyt_bordesredondos"
+                        android:backgroundTint="#FFFFFF"
+                        android:text="Ubicación:"
+                        android:textColor="#303030"
+                        android:textSize="12dp"
+                        app:layout_constraintStart_toEndOf="@+id/imageViewEmail"
+                        app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
+
+                    <ImageView
+                        android:id="@+id/imageViewUbicacion"
+                        android:layout_width="16dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="2dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/lblUbicacion"
+                        app:srcCompat="@drawable/icon_location"
+                        app:tint="@color/colorPrimary" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+
+        <fragment
+            android:id="@+id/map_usuario"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="303dp"
+            android:layout_marginTop="10dp"
+            tools:context=".MainActivity" />
+
+        <Button
+            android:id="@+id/btnEditar"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/lyt_bordesredondos"
+            android:backgroundTint="@color/colorNaranja"
+            android:layout_gravity="center_horizontal"
+            android:text="EDITAR"
+            android:textColor="#FFFFFF"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/map_usuario" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/><TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    </LinearLayout>
+</ScrollView>

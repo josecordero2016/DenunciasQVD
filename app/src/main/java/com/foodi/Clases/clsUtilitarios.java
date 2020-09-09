@@ -8,7 +8,7 @@ import java.io.ByteArrayOutputStream;
 
 public class clsUtilitarios {
 
-    public static String IP_SERVIDOR = "192.168.101.12";
+    public static String IP_SERVIDOR = "192.168.100.111";
 
     public byte[] imagenAbyte(ImageView imageView){
         Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();

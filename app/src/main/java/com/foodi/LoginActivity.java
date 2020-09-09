@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.foodi.Clases.GlobalClass;
 import com.foodi.WSSoap.SOAPWork;
 import com.foodi.WebServices.Asynchtask;
 import org.json.JSONException;
@@ -47,13 +49,16 @@ public class LoginActivity extends AppCompatActivity implements Asynchtask {
     public void iniciarSesion(View view){
 
         Intent intent = new Intent(this, actAdministrador.class);
+        GlobalClass globalclass=(GlobalClass) getApplicationContext();
+        globalclass.setId_usuario_actual("1");
         startActivity(intent);
         this.finish();
     }
 
     @Override
     public void processFinish(String result) throws JSONException {
-        String[] resultados = result.split("_");
+
+        String[] resultados = result.toString().split("_");
         if (resultados[0].equals("OK")) {
             Intent intent;
             if (resultados[1].equals("C")) {

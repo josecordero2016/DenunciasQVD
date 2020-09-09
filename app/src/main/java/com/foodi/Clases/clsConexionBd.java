@@ -29,7 +29,7 @@ public class clsConexionBd {
                 Class.forName("org.postgresql.Driver");
                 StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                 StrictMode.setThreadPolicy(policy);
-                connection = DriverManager.getConnection("jdbc:postgresql://"+IP_SERVIDOR+":5432/foodi","postgres", "pa1998");
+                connection = DriverManager.getConnection("jdbc:postgresql://26.91.27.80:5432/denunciasqvd","postgres", "pa1998");
                 okConnection = connection.isValid(1000);
                 System.out.println(okConnection ? "TEST OK" : "TEST FAIL");
                 ok = okConnection ? "OK" : "TEST FAIL";

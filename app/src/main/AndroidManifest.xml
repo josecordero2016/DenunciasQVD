@@ -10,8 +10,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".Clases.GlobalClass"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDTVNENolhLJXpEbLABS_B0F9V89aXT-rY"/>
+
         <activity android:name=".actAdministrador"></activity>
         <activity android:name=".LoginActivity">
             <intent-filter>
