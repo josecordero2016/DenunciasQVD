@@ -1,13 +1,11 @@
 package com.foodi;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +30,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import org.json.JSONException;
 
 import java.sql.ResultSet;
+import java.text.DecimalFormat;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -39,10 +38,10 @@ import static com.foodi.Clases.clsUtilitarios.IP_SERVIDOR;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link frgUsuario#newInstance} factory method to
+ * Use the {@link frgEdicionUsuario#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class frgUsuario extends Fragment implements OnMapReadyCallback, Asynchtask  {
+public class frgEdicionUsuario extends Fragment implements OnMapReadyCallback, Asynchtask,  GoogleMap.OnMapClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -53,7 +52,7 @@ public class frgUsuario extends Fragment implements OnMapReadyCallback, Asynchta
     private String mParam1;
     private String mParam2;
 
-    public frgUsuario() {
+    public frgEdicionUsuario() {
         // Required empty public constructor
     }
 
@@ -63,11 +62,11 @@ public class frgUsuario extends Fragment implements OnMapReadyCallback, Asynchta
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment frgUsuario.
+     * @return A new instance of fragment frgEdicionUsuario.
      */
     // TODO: Rename and change types and number of parameters
-    public static frgUsuario newInstance(String param1, String param2) {
-        frgUsuario fragment = new frgUsuario();
+    public static frgEdicionUsuario newInstance(String param1, String param2) {
+        frgEdicionUsuario fragment = new frgEdicionUsuario();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -86,16 +85,17 @@ public class frgUsuario extends Fragment implements OnMapReadyCallback, Asynchta
     GoogleMap Mapa;
     Float latitud=(float)0, longitud=(float)0;
     LatLng pos = null;
-    Integer ban=0;
+
     View view=null;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        view= inflater.inflate(R.layout.fragment_frg_edicion_usuario, container, false);
+
         GlobalClass globalclass=(GlobalClass)getActivity().getApplicationContext();
         globalclass.setId_usuario_actual("1");
 
-        view=inflater.inflate(R.layout.fragment_frg_usuario, container, false);
         Map<String, String> map = new LinkedHashMap<>();
         try
         {
@@ -118,15 +118,41 @@ public class frgUsuario extends Fragment implements OnMapReadyCallback, Asynchta
                 pruebina = rs.getBytes(1);
             }
             Bitmap bitm = BitmapFactory.decodeByteArray(pruebina, 0, pruebina.length);
-            ImageView iv3 = (ImageView) view.findViewById(R.id.profile_image);
+            ImageView iv3 = (ImageView) view.findViewById(R.id.perfil_usuarioEdit);
             iv3.setImageBitmap(bitm);
-            }
+        }
         catch (Exception e) {
             Toast.makeText(getContext(), "Error, "+e.toString(),Toast.LENGTH_LONG).show();
         }
 
 
         return view;
+    }
+    String[] resultados=null;
+    TextView latitudtxt= null;
+    TextView longitudtxt= null;
+    @Override
+    public void processFinish(String result) throws JSONException {
+        resultados =result.split("&");
+        TextView nombre= view.findViewById(R.id.txtNombreEdit);
+        TextView apelllido= view.findViewById(R.id.txtApellidoEdit);
+        TextView telefono= view.findViewById(R.id.txtTelefonoEdit);
+        TextView correo= view.findViewById(R.id.txtCorreoEdit);
+         latitudtxt= view.findViewById(R.id.txtlatitud);
+         longitudtxt= view.findViewById(R.id.txtlongitud);
+
+        nombre.setText(resultados[0]);
+        apelllido.setText(resultados[1]);
+        telefono.setText(resultados[2]);
+        correo.setText(resultados[5]);
+        latitudtxt.setText(resultados[3]);
+        longitudtxt.setText(resultados[4]);
+
+        latitud=Float. parseFloat( resultados[3]);
+        longitud=Float. parseFloat(resultados[4]);
+        pos = new LatLng(latitud, longitud);
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map_usuarioEdit);
+        mapFragment.getMapAsync(this);
     }
 
     @Override
@@ -135,30 +161,18 @@ public class frgUsuario extends Fragment implements OnMapReadyCallback, Asynchta
         CameraUpdate camUpd1 = CameraUpdateFactory.newLatLngZoom(new LatLng(latitud, longitud), 15);
         Mapa.addMarker(new MarkerOptions().position(pos).title("Ubicación"));
         Mapa.moveCamera(camUpd1);
+        Mapa.setOnMapClickListener(this);
     }
-    String[] resultados=null;
+
     @Override
-    public void processFinish(String result) throws JSONException {
-        resultados =result.split("&");
-        TextView nombre= view.findViewById(R.id.txtNombre);
-        TextView telefono= view.findViewById(R.id.txtTelefono);
-        TextView correo= view.findViewById(R.id.txtEmail);
-        TextView usuario= view.findViewById(R.id.txtUsuario);
-
-
-        nombre.setText(resultados[0]+" "+resultados[1]);
-        telefono.setText(resultados[2]);
-        correo.setText(resultados[5]);
-        usuario.setText(resultados[6]);
-
-
-        latitud=Float. parseFloat( resultados[3]);
-        longitud=Float. parseFloat(resultados[4]);
-        pos = new LatLng(latitud, longitud);
-        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map_usuario);
-        mapFragment.getMapAsync(this);
+    public void onMapClick(LatLng latLng) {
+        Mapa.clear();
+        Mapa.addMarker(new MarkerOptions().position(latLng).title("Hola"));
+        latitud=(float)latLng.latitude;
+        longitud=(float)latLng.longitude;
+        DecimalFormat df = new DecimalFormat("#.00000");
+        latitudtxt.setText(String.valueOf(df.format(latLng.latitude)));
+        longitudtxt.setText(String.valueOf(df.format(latLng.longitude)));
     }
-
-
 
 }

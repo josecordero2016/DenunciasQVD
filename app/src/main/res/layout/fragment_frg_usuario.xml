@@ -12,15 +12,15 @@
         android:orientation="vertical">
         <!-- TODO: Update blank fragment layout -->
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="20dp"
-
-           />
-
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="5dp"
+            app:civ_border_color="@color/colorPrimary"
+            app:civ_border_width="2dp" />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -258,13 +258,15 @@
             tools:context=".MainActivity" />
 
         <Button
-            android:id="@+id/btnEditar"
+            android:id="@+id/btnEditarUsuario"
+
             android:layout_width="110dp"
             android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
             android:background="@drawable/lyt_bordesredondos"
             android:backgroundTint="@color/colorNaranja"
-            android:layout_gravity="center_horizontal"
+            android:onClick="EditarUsuario"
             android:text="EDITAR"
             android:textColor="#FFFFFF"
             android:textSize="14dp"
