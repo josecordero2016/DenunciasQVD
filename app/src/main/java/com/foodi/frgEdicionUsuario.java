@@ -1,10 +1,15 @@
 package com.foodi;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
+import android.location.Location;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -21,6 +26,7 @@ import com.foodi.WebServices.Asynchtask;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -41,7 +47,7 @@ import static com.foodi.Clases.clsUtilitarios.IP_SERVIDOR;
  * Use the {@link frgEdicionUsuario#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class frgEdicionUsuario extends Fragment implements OnMapReadyCallback, Asynchtask,  GoogleMap.OnMapClickListener {
+public class frgEdicionUsuario extends Fragment implements OnMapReadyCallback, Asynchtask, GoogleMap.OnMapClickListener, GoogleMap.OnMyLocationButtonClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -160,6 +166,14 @@ public class frgEdicionUsuario extends Fragment implements OnMapReadyCallback, A
         Mapa.addMarker(new MarkerOptions().position(pos).title("Ubicación"));
         Mapa.moveCamera(camUpd1);
         Mapa.setOnMapClickListener(this);
+       Mapa.setOnMyLocationButtonClickListener(this);
+
+if(ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED)
+    return;
+
+        Mapa.setMyLocationEnabled(true);
+
     }
 
     @Override
@@ -171,6 +185,18 @@ public class frgEdicionUsuario extends Fragment implements OnMapReadyCallback, A
         DecimalFormat df = new DecimalFormat("#.00000");
         latitudtxt.setText(String.valueOf(df.format(latLng.latitude)));
         longitudtxt.setText(String.valueOf(df.format(latLng.longitude)));
+
+
     }
 
+
+
+    @Override
+    public boolean onMyLocationButtonClick() {
+        DecimalFormat df = new DecimalFormat("#.00000");
+        Location location=Mapa.getMyLocation();
+        latitudtxt.setText(String.valueOf(df.format(location.getLatitude())));
+        longitudtxt.setText(String.valueOf(df.format(location.getLongitude())));
+        return false;
+    }
 }

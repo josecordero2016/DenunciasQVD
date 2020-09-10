@@ -51,6 +51,8 @@ public class LoginActivity extends AppCompatActivity implements Asynchtask {
         permisos.add(Manifest.permission.CAMERA);
         permisos.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         permisos.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+        permisos.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+        permisos.add(Manifest.permission.ACCESS_FINE_LOCATION);
         getPermission(permisos);
 
         Intent galeria = new Intent();
@@ -95,7 +97,9 @@ public class LoginActivity extends AppCompatActivity implements Asynchtask {
     }
 
     public void registrarse(View view){
-        Toast.makeText(getApplicationContext(),"Registrarse",Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, RegistroActivity.class);
+        startActivity(intent);
+        this.finish();
     }
 
     public void iniciarSesion(View view){
