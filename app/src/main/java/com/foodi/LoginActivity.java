@@ -16,6 +16,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.foodi.Clases.GlobalClass;
 import com.foodi.WSSoap.SOAPWork;
 import com.foodi.WebServices.Asynchtask;
 import org.json.JSONException;
@@ -33,27 +35,18 @@ public class LoginActivity extends AppCompatActivity implements Asynchtask {
     private static final int PICK_IMAGE = 1;
     Uri imageUri;
     ImageView ivLetras;
+    EditText txtNombreUsuario;
+    EditText txtContrasena;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        EditText txtNombreUsuario = findViewById(R.id.txtNombreUsuario);
-        EditText txtContrasena = findViewById(R.id.txtContrasena);
+        txtNombreUsuario = findViewById(R.id.txtNombreUsuario);
+        txtContrasena = findViewById(R.id.txtContrasena);
         ivLetras = findViewById(R.id.ivLetras);
-       /* Map<String, String> map = new LinkedHashMap<>();
-        try
-        {
-            map.put("sentencia", "select consultar_usuario('"+txtNombreUsuario.getText()+"','"+txtContrasena.getText()+"')");
-            SOAPWork dd = new SOAPWork("http://"+IP_SERVIDOR+":8080/Foodi_srv/ws_Procesar?WSDL", map, this, this);
-            dd.setMethod_name("consultar");
-            dd.execute();
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            Toast.makeText(getApplicationContext(), "Error, "+e.toString(),Toast.LENGTH_LONG).show();
-        }*/
+
         ArrayList<String> permisos = new ArrayList<String>();
         permisos.add(Manifest.permission.CAMERA);
         permisos.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -106,9 +99,19 @@ public class LoginActivity extends AppCompatActivity implements Asynchtask {
     }
 
     public void iniciarSesion(View view){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        this.finish();
+        Map<String, String> map = new LinkedHashMap<>();
+        try
+        {
+            map.put("sentencia", "select consultar_usuario('"+txtNombreUsuario.getText()+"','"+txtContrasena.getText()+"')");
+            SOAPWork dd = new SOAPWork("http://"+IP_SERVIDOR+":8080/Denunciasqvd_srv/ws_Procesar?WSDL", map, this, this);
+            dd.setMethod_name("consultar");
+            dd.execute();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "Error, "+e.toString(),Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -132,14 +135,17 @@ public class LoginActivity extends AppCompatActivity implements Asynchtask {
         String[] resultados = result.split("_");
         if (resultados[0].equals("OK")) {
             Intent intent;
-            if (resultados[1].equals("C")) {
+            if (resultados[1].equals("CIUDADANO")) {
                 intent = new Intent(this, MainActivity.class);
             } else {
                 intent = new Intent(this, actAdministrador.class);
             }
+            GlobalClass globalclass=(GlobalClass)getApplicationContext();
+            globalclass.setId_usuario_actual(resultados[2]);
             startActivity(intent);
             this.finish();
-        } else {
+        }
+        else {
             Toast.makeText(getApplicationContext(), "Usuario y/o contraseña incorrectos", Toast.LENGTH_LONG).show();
         }
     }
