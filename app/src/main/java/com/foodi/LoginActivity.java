@@ -103,7 +103,7 @@ public class LoginActivity extends AppCompatActivity implements Asynchtask {
         try
         {
             map.put("sentencia", "select consultar_usuario('"+txtNombreUsuario.getText()+"','"+txtContrasena.getText()+"')");
-            SOAPWork dd = new SOAPWork("http://"+IP_SERVIDOR+":8080/Denunciasqvd_srv/ws_Procesar?WSDL", map, this, this);
+            SOAPWork dd = new SOAPWork("http://"+IP_SERVIDOR+":18609/Denunciasqvd_srv/ws_Procesar?WSDL", map, this, this);
             dd.setMethod_name("consultar");
             dd.execute();
         }

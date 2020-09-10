@@ -94,8 +94,6 @@ public class frgEdicionUsuario extends Fragment implements OnMapReadyCallback, A
         view= inflater.inflate(R.layout.fragment_frg_edicion_usuario, container, false);
 
         GlobalClass globalclass=(GlobalClass)getActivity().getApplicationContext();
-        globalclass.setId_usuario_actual("1");
-
         Map<String, String> map = new LinkedHashMap<>();
         try
         {

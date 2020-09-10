@@ -93,8 +93,6 @@ public class frgUsuario extends Fragment implements OnMapReadyCallback, Asynchta
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         GlobalClass globalclass=(GlobalClass)getActivity().getApplicationContext();
-        globalclass.setId_usuario_actual("1");
-
         view=inflater.inflate(R.layout.fragment_frg_usuario, container, false);
         Map<String, String> map = new LinkedHashMap<>();
         try
