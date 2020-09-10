@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".actDetalleDenuncia">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"></include>
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="130dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="10dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.016"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:srcCompat="@drawable/letrasdqvd" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/ivFotoDetalle"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:scaleType="fitXY"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+                <TextView
+                    android:id="@+id/txtTituloDetalle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="310dp"
+                    android:layout_marginEnd="10dp"
+                    android:textColor="#252525"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    tools:text="Soy un título" ></TextView>
+
+                <TextView
+                    android:id="@+id/txt2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="400dp"
+                    android:layout_marginEnd="10dp"
+                    android:textColor="#252525"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    tools:text="Descripción:" ></TextView>
+
+                <TextView
+                    android:id="@+id/txtDescripcionDetalle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="420dp"
+                    android:layout_marginEnd="10dp"
+                    android:textColor="#6A6A6A"
+                    android:textSize="16dp"
+                    tools:text="Claro que todo esta mal por aqui no hay nada que valga, rayos que estres tener que lidiar con esta pipol que no arregla nada"></TextView>
+
+
+                <TextView
+                    android:id="@+id/txt3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtDescripcionDetalle"
+
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:textColor="#252525"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    tools:text="Ubicación:"></TextView>
+
+                <TextView
+                    android:id="@+id/txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="290dp"
+                    android:layout_marginTop="340dp"
+                    android:layout_marginEnd="10dp"
+                    android:textColor="#252525"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    tools:text="Puntaje:" ></TextView>
+
+                <TextView
+                    android:id="@+id/txtPuntajeDetalle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="290dp"
+                    android:layout_marginTop="365dp"
+                    android:layout_marginEnd="10dp"
+                    android:textColor="#6A6A6A"
+                    android:textSize="16dp"
+                    tools:text="703"></TextView>
+
+                <TextView
+                    android:id="@+id/txtUsuarioDetalle"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="70dp"
+                    android:layout_marginTop="340dp"
+                    android:layout_marginEnd="10dp"
+                    android:textColor="#6A6A6A"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    tools:text="Carlos Marin"></TextView>
+
+                <TextView
+                    android:id="@+id/txtFechaDetalle"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="70dp"
+                    android:layout_marginTop="365dp"
+                    android:layout_marginEnd="10dp"
+                    android:textColor="#6A6A6A"
+                    android:textSize="16dp"
+                    tools:text="17/09/2020"></TextView>
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="340dp"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/imagenejemplo" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
