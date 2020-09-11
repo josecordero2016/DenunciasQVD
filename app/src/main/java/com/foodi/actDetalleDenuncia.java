@@ -28,6 +28,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static com.foodi.Clases.clsUtilitarios.IP_SERVIDOR;
+import static com.foodi.Clases.clsUtilitarios.PUERTO;
 import static com.foodi.Clases.clsUtilitarios.denuncia_selec;
 import com.foodi.WebServices.Asynchtask;
 
@@ -90,7 +91,7 @@ public class actDetalleDenuncia extends AppCompatActivity  implements OnMapReady
         try
         {
             map.put("sentencia", "select consultar_puntos('"+id_denuncia+"')");
-            SOAPWork dd = new SOAPWork("http://"+IP_SERVIDOR+":8080/Denunciasqvd_srv/ws_Procesar?WSDL", map, this, this);
+            SOAPWork dd = new SOAPWork("http://"+IP_SERVIDOR+":"+PUERTO+"/Denunciasqvd_srv/ws_Procesar?WSDL", map, this, this);
             dd.setMethod_name("consultar");
             dd.execute();
             proceso = 1;

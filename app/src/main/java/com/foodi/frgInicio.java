@@ -33,6 +33,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.foodi.Clases.clsUtilitarios.IP_SERVIDOR;
+import static com.foodi.Clases.clsUtilitarios.PUERTO;
 import static com.foodi.Clases.clsUtilitarios.denuncia_selec;
 
 public class frgInicio extends Fragment implements adtdenuncias.OnNoteListener {
@@ -74,7 +75,7 @@ public class frgInicio extends Fragment implements adtdenuncias.OnNoteListener {
             rclPopulares = view.findViewById(R.id.rclPopulares);
             final LinearLayoutManager linear = new LinearLayoutManager(getActivity().getApplicationContext());
             linear.setOrientation(LinearLayoutManager.VERTICAL);
-            Retrofit rf = new Retrofit.Builder().baseUrl("http://" + IP_SERVIDOR + ":8080/").addConverterFactory(GsonConverterFactory.create()).build();
+            Retrofit rf = new Retrofit.Builder().baseUrl("http://" + IP_SERVIDOR + ":"+PUERTO+"/").addConverterFactory(GsonConverterFactory.create()).build();
             itfRetrofit retrofit_interfaz = rf.create(itfRetrofit.class);
             Call<List<DetalleDenuncia>> call = retrofit_interfaz.getDetalleDenuncia();
             call.enqueue(new Callback<List<DetalleDenuncia>>() {

@@ -70,6 +70,23 @@ public class clsConexionBd {
             estado = "Error "+e;
         }
     }
+    public String ejecutarPs_mensaje(PreparedStatement ps){
+        String mensaje=null;
+        ResultSet resultado;
+        try {
+            str = this.connection.createStatement();
+            resultado=ps.executeQuery();
+            while (resultado.next()) {
+                mensaje = resultado.getString(1);
+            }
+            ps.close();
+        }
+        catch (Exception e){
+            estado = "Error "+e;
+            mensaje="Error";
+        }
+        return mensaje;
+    }
 
     public void ejecutar(String sentencia) {
         try

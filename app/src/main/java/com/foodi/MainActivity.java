@@ -36,7 +36,6 @@ import java.sql.ResultSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static com.foodi.Clases.clsUtilitarios.IP_SERVIDOR;
 
 public class MainActivity extends AppCompatActivity implements Asynchtask {
 

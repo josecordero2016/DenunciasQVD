@@ -27,6 +27,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static com.foodi.Clases.clsUtilitarios.IP_SERVIDOR;
+import static com.foodi.Clases.clsUtilitarios.PUERTO;
 
 public class LoginActivity extends AppCompatActivity implements Asynchtask {
 
@@ -107,7 +108,7 @@ public class LoginActivity extends AppCompatActivity implements Asynchtask {
         try
         {
             map.put("sentencia", "select consultar_usuario('"+txtNombreUsuario.getText()+"','"+txtContrasena.getText()+"')");
-            SOAPWork dd = new SOAPWork("http://"+IP_SERVIDOR+":18609/Denunciasqvd_srv/ws_Procesar?WSDL", map, this, this);
+            SOAPWork dd = new SOAPWork("http://"+IP_SERVIDOR+":"+PUERTO+"/Denunciasqvd_srv/ws_Procesar?WSDL", map, this, this);
             dd.setMethod_name("consultar");
             dd.execute();
         }

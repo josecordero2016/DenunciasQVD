@@ -36,6 +36,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static com.foodi.Clases.clsUtilitarios.IP_SERVIDOR;
+import static com.foodi.Clases.clsUtilitarios.PUERTO;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -98,7 +99,7 @@ public class frgUsuario extends Fragment implements OnMapReadyCallback, Asynchta
         try
         {
             map.put("sentencia", "select consultardatos_usuario("+ globalclass.getId_usuario_actual()+")");
-            SOAPWork dd = new SOAPWork("http://"+IP_SERVIDOR+":18609/Denunciasqvd_srv/ws_Procesar?WSDL", map, getContext(), this);
+            SOAPWork dd = new SOAPWork("http://"+IP_SERVIDOR+":"+PUERTO+"/Denunciasqvd_srv/ws_Procesar?WSDL", map, getContext(), this);
             dd.setMethod_name("consultar");
             dd.execute();
 
