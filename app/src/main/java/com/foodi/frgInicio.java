@@ -65,8 +65,8 @@ public class frgInicio extends Fragment implements adtdenuncias.OnNoteListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_frg_inicio, container, false);
-        clsConexionBd con = new clsConexionBd();
-        ResultSet rs= con.consultar("select * from usuario");
+        //clsConexionBd con = new clsConexionBd();
+        //ResultSet rs= con.consultar("select * from usuario");
         try {
             rclPopulares = view.findViewById(R.id.rclDenunciasAdmin);
             final LinearLayoutManager linear = new LinearLayoutManager(getActivity().getApplicationContext());
