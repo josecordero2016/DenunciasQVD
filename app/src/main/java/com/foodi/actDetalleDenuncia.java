@@ -22,7 +22,6 @@ import android.widget.Toast;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
-import com.facebook.share.BuildConfig;
 import com.facebook.share.model.ShareContent;
 import com.facebook.share.model.ShareHashtag;
 import com.facebook.share.model.ShareMediaContent;
@@ -68,7 +67,7 @@ public class actDetalleDenuncia extends AppCompatActivity implements OnMapReadyC
     int id_denuncia;
     ShareDialog shareDialog;
     CallbackManager callbackManager;
-    FloatingActionButton btnTwitterFlo;
+    FloatingActionButton btnTwitter;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +98,7 @@ public class actDetalleDenuncia extends AppCompatActivity implements OnMapReadyC
         fecha = fecha.substring(0, 10);
         id_denuncia = Integer.parseInt(denuncia_selec.getIdDenuncia().getIdDenuncia());
 
-        btnTwitterFlo=(FloatingActionButton) findViewById(R.id.btnTwitterFlo);
+        btnTwitter = findViewById(R.id.btnTwitterFlo);
 
         txtTipoDetalle.setText(denuncia_selec.getIdDenuncia().getTipo());
         txtUsuarioDetalle.setText(denuncia_selec.getIdDenuncia().getIdUsuario().getNombres() + " " + denuncia_selec.getIdDenuncia().getIdUsuario().getApellidos());
@@ -108,13 +107,13 @@ public class actDetalleDenuncia extends AppCompatActivity implements OnMapReadyC
         txtDescripcionDetalle.setText(denuncia_selec.getIdDenuncia().getDetalles());
         txtTituloDetalle.setText(denuncia_selec.getIdDenuncia().getTitulo());
 
-        btnTwitterFlo.setOnClickListener(new View.OnClickListener() {
+        btnTwitter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ivFotoDetalle.buildDrawingCache();
                 Bitmap bitmap = ivFotoDetalle.getDrawingCache();
                 try {
-                    File file = new File(getApplicationContext().getExternalCacheDir(), File.separator +"twitter_256.png");
+                    File file = new File(getApplicationContext().getExternalCacheDir(), File.separator +"imagenejemplo.jpg");
                     FileOutputStream fOut = new FileOutputStream(file);
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
                     fOut.flush();
@@ -124,6 +123,8 @@ public class actDetalleDenuncia extends AppCompatActivity implements OnMapReadyC
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), BuildConfig.APPLICATION_ID +".provider", file);
 
+                    // Intent intent = new Intent(Intent.ACTION_SEND);
+                    //intent.setType("text/plain");
                     intent.putExtra(Intent.EXTRA_TEXT, "DenunciasQVD informa sobre la denuncia realizada por: "+txtUsuarioDetalle.getText()+"\n" +
                             "Titulo: "+txtTituloDetalle.getText()+"\n" +
                             "Descripción: "+txtDescripcionDetalle.getText()+"\n" +
@@ -135,7 +136,7 @@ public class actDetalleDenuncia extends AppCompatActivity implements OnMapReadyC
                     intent.setPackage("com.twitter.android");
                     startActivity(intent);
                 }catch (Exception e){
-                    //
+                    Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();
                 }
 
 
