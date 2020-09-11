@@ -54,7 +54,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/txtTitulo"
+            android:id="@+id/txtTituloDenuncia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -70,7 +70,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/txtDetalle"
+            android:id="@+id/txtDetalleDenuncia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"

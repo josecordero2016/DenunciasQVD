@@ -15,6 +15,14 @@ public class Usuario {
         this.idUsuario = idUsuario;
     }
 
+    public Usuario(String idUsuario, String latitudActual, String longitudActual,String latitudHogar, String longitudHogar) {
+        this.latitudHogar = latitudHogar;
+        this.longitudHogar = longitudHogar;
+        this.latitudActual = latitudActual;
+        this.longitudActual = longitudActual;
+        this.idUsuario = idUsuario;
+    }
+
     public String getLatitudHogar() {
         return latitudHogar;
     }

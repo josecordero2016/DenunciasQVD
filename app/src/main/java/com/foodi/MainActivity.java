@@ -140,8 +140,8 @@ public class MainActivity extends AppCompatActivity implements Asynchtask {
 
     public void registrarDenuncia(View view) {
         final GlobalClass globalclass = (GlobalClass) getApplicationContext();
-        EditText txtTituloDenun = findViewById(R.id.txtTitulo);
-        EditText txtDetalleDenun = findViewById(R.id.txtDetalle);
+        EditText txtTituloDenun = findViewById(R.id.txtTituloDenuncia);
+        EditText txtDetalleDenun = findViewById(R.id.txtDetalleDenuncia);
         Spinner spTipoDenuncia = findViewById(R.id.spTipoDenuncia);
         final EditText txtLatDenun = findViewById(R.id.txtLat);
         final EditText txtLonDenun = findViewById(R.id.txtLon);
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements Asynchtask {
             //A ingresado todos los datos
             String query = "select sp_registrar_denuncia(?,?,?,?,?,?,?)";
             byte[] imagenDenuncia = utili.imagenAbyte(imgDenuncia);
-            final clsConexionBd con = new clsConexionBd();
+            clsConexionBd con = new clsConexionBd();
             PreparedStatement ps = null;
             try {
                 ps = con.connection.prepareStatement(query);
@@ -163,10 +163,10 @@ public class MainActivity extends AppCompatActivity implements Asynchtask {
                 ps.setString(5, txtLonDenun.getText().toString());
                 ps.setString(6, spTipoDenuncia.getSelectedItem().toString());
                 ps.setBytes(7, imagenDenuncia);
-                final String mensaje= con.ejecutarPs_mensaje(ps);
+                final String mensaje = con.ejecutarPs_mensaje(ps);
 
                 ps.close();
-                con.cerrarConexion();
+                // con.cerrarConexion();
                 Toast.makeText(getApplicationContext(), "Datos Actualizados", Toast.LENGTH_LONG).show();
                 txtTituloDenun.setText("");
                 txtDetalleDenun.setText("");
@@ -175,59 +175,37 @@ public class MainActivity extends AppCompatActivity implements Asynchtask {
 
                 //realizar notificaciones
                 try {
-                    //rclPopulares = view.findViewById(R.id.rclDenunciasAdmin);
-                    final LinearLayoutManager linear = new LinearLayoutManager(getApplicationContext());
-                    linear.setOrientation(LinearLayoutManager.VERTICAL);
-                    Retrofit rf = new Retrofit.Builder().baseUrl("http://" + IP_SERVIDOR + ":" + PUERTO + "/").addConverterFactory(GsonConverterFactory.create()).build();
-                    itfRetrofit retrofit_interfaz = rf.create(itfRetrofit.class);
-                    Call<List<Usuario>> call = retrofit_interfaz.getUsuario();
-                    call.enqueue(new Callback<List<Usuario>>() {
-                        @Override
-                        public void onResponse(Call<List<Usuario>> call, Response<List<Usuario>> response) {
-                            //Codigo de respuesta a la petición realizada
-                            String cod_respuesta = "Código " + response.code();
-                            //Definiendo donde se guardaran los valores obtenidos
-                            String valores = "";
-                            try {
-                                lista = response.body();
-                                final List<Usuario> finalLista = lista;
+                    //con = new clsConexionBd();
+                    ResultSet rs = con.consultar("select id_usuario,latitud_actual,longitud_actual, latitud_hogar,longitud_hogar from usuario where tipo!='ADMIN'  and id_usuario!="+globalclass.getId_usuario_actual());
+                    List<Usuario> finalLista = new ArrayList<>();
+                    while (rs.next()) {
+                        finalLista.add(new Usuario(rs.getInt(1)+"", rs.getString(2).toString(), rs.getString(3), rs.getString(4), rs.getString(5)));
+                    }
+                    rs.close();
+                    // con.cerrarConexion();
 
-                                String query = "select sp_registrar_notificaion(?,?)";
-                                clsConexionBd con = new clsConexionBd();
-                                for (int i = 0; i < finalLista.size(); i++) {
-                                    if(ditanceBetwen(Double.parseDouble(txtLatDenun.getText().toString()), Double.parseDouble(txtLonDenun.getText().toString()), finalLista.get(i)))
-                                    {
-                                        PreparedStatement ps = con.connection.prepareStatement(query);
-                                        ps.setInt(1, Integer.parseInt(globalclass.getId_usuario_actual()));
-                                        ps.setInt(2, Integer.parseInt(mensaje));
-                                        con.ejecutarPs(ps);
-                                        ps.close();
-                                    }
-                                }
-                                con.cerrarConexion();
-                            } catch (Exception e) {
-                                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-                            }
+                    query = "select sp_registrar_notificaion(?,?)";
+                    //con = new clsConexionBd();
+                    for (int i = 0; i < finalLista.size(); i++) {
+                        if (ditanceBetwen(Double.parseDouble(txtLatDenun.getText().toString()), Double.parseDouble(txtLonDenun.getText().toString()), finalLista.get(i))) {
+                            ps = con.connection.prepareStatement(query);
+                            ps.setInt(1, Integer.parseInt(finalLista.get(i).getIdUsuario()));
+                            ps.setInt(2, Integer.parseInt(mensaje));
+                            con.ejecutarPs(ps);
+                            ps.close();
                         }
-
-                        @Override
-                        public void onFailure(Call<List<Usuario>> call, Throwable t) {
-                            Toast.makeText(getApplicationContext(), "No se ha podido establecer conexión con el servidor " + t.toString(), Toast.LENGTH_LONG).show();
-                        }
-                    });
-
+                    }
+                    con.cerrarConexion();
                 } catch (Exception e) {
                     Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
         } else {
             //falta ingresar datos
             Toast.makeText(this, "Ingresa todos los datos", Toast.LENGTH_LONG).show();
         }
-
     }
 
     public void GuardarDatos(View view) {
