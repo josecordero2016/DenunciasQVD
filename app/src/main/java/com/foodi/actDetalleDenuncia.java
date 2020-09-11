@@ -114,7 +114,7 @@ public class actDetalleDenuncia extends AppCompatActivity implements OnMapReadyC
                 ivFotoDetalle.buildDrawingCache();
                 Bitmap bitmap = ivFotoDetalle.getDrawingCache();
                 try {
-                    File file = new File(getApplicationContext().getExternalCacheDir(), File.separator +"logo_facebook.png");
+                    File file = new File(getApplicationContext().getExternalCacheDir(), File.separator +"twitter_256.png");
                     FileOutputStream fOut = new FileOutputStream(file);
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
                     fOut.flush();
