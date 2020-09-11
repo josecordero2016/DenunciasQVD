@@ -10,10 +10,13 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.foodi.Adaptadores.adtdenuncias;
+import com.foodi.Clases.clsConexionBd;
 import com.foodi.Interfaces.itfRetrofit;
 import com.foodi.Modelos.DetalleDenuncia;
 import com.foodi.Modelos.Usuario;
 
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -25,7 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static com.foodi.Clases.clsUtilitarios.IP_SERVIDOR;
 import static com.foodi.Clases.clsUtilitarios.PUERTO;
 
-public class frgNotificaciones extends Fragment {
+public class frgNotificaciones extends Fragment implements adtdenuncias.OnNoteListener {
 
 
     private static final String ARG_PARAM1 = "param1";
@@ -93,10 +96,20 @@ public class frgNotificaciones extends Fragment {
                     Toast.makeText(getActivity().getApplicationContext(), "No se ha podido establecer conexión con el servidor " + t.toString(), Toast.LENGTH_LONG).show();
                 }
             });
-
+            clsConexionBd con = new clsConexionBd();
+            /*ResultSet rs = con.consultar("select id_denuncia from notificacion");
+            List<String> ids = new ArrayList<>();
+            while(rs.next()) {
+                ids.add(rs.getString(1));
+            }*/
         } catch (Exception e) {
             Toast.makeText(getActivity().getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
         }
         return view;
+    }
+
+    @Override
+    public void onNoteClick(int position) {
+
     }
 }

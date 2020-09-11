@@ -23,15 +23,15 @@
             android:orientation="horizontal">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imgDeunciaNotificaion"
+                android:id="@+id/ivImagen"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginHorizontal="11dp"
-                android:layout_marginTop="11dp"
+                android:layout_marginTop="15dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/imagenejemplo" />
+                android:src="@drawable/notificacion" />
 
             <LinearLayout
                 android:layout_width="match_parent"
