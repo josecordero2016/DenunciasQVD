@@ -12,4 +12,6 @@
     <color name="colorStatusOscuro">#63c40c</color>
     <color name="colorRipple">#97CD67</color>
     <color name="colorBlanco">#FFFFFF</color>
+    <color name="facebookColor">#5153e7</color>
+    <color name="twitterColor">#48BFE3</color>
 </resources>

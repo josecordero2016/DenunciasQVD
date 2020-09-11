@@ -30,6 +30,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation files('libs\\ksoap2-android-assembly-2.6.1-jar-with-dependencies.jar')
     implementation files('libs\\postgresql-42.2.1.jre7.jar')
+    implementation 'com.github.clans:fab:1.6.4'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -45,4 +46,6 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    //Facebook
+    implementation 'com.facebook.android:facebook-share:[5,6)'
 }

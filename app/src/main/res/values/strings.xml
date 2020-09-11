@@ -2,4 +2,7 @@
     <string name="app_name">DenunciasQVD</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="facebook_app_id">1581665728679134</string>
+    <string name="facebook_login_protocol_scheme">1581665728679134</string>
 </resources>

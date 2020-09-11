@@ -333,9 +333,39 @@
                     app:layout_constraintTop_toTopOf="@+id/imageView3"
                     tools:ignore="MissingConstraints" />
 
+                <com.github.clans.fab.FloatingActionMenu
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:menu_fab_label="Compartir en Redes Sociales">
+
+
+                    <com.github.clans.fab.FloatingActionButton
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:fab_colorNormal="@color/twitterColor"
+                        android:src="@drawable/ic_twitter"
+                        app:fab_label="Twitter">
+                    </com.github.clans.fab.FloatingActionButton>
+
+                    <com.github.clans.fab.FloatingActionButton
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:fab_colorNormal="@color/facebookColor"
+                        android:src="@drawable/ic_facebook"
+                        android:onClick="compartirFacebook"
+                        app:fab_label="Facebook">
+                    </com.github.clans.fab.FloatingActionButton>
+
+                </com.github.clans.fab.FloatingActionMenu>
+
+
+
+
+
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

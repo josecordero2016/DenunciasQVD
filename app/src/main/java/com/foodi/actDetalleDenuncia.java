@@ -12,6 +12,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookSdk;
+import com.facebook.share.model.ShareContent;
+import com.facebook.share.model.ShareHashtag;
+import com.facebook.share.model.ShareMediaContent;
+import com.facebook.share.model.SharePhoto;
+import com.facebook.share.model.SharePhotoContent;
+import com.facebook.share.widget.ShareDialog;
 import com.foodi.Clases.GlobalClass;
 import com.foodi.WSSoap.SOAPWork;
 import com.google.android.gms.maps.CameraUpdate;
@@ -41,12 +49,20 @@ public class actDetalleDenuncia extends AppCompatActivity  implements OnMapReady
     ImageView ivFotoDetalle, ivPerfilDetalle;
     int proceso;
     int id_denuncia;
+    ShareDialog shareDialog;
+    CallbackManager callbackManager;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_act_detalle_denuncia);
+
+        FacebookSdk.sdkInitialize(getApplicationContext());
+
+        //Inicializar Facebook
+        callbackManager=CallbackManager.Factory.create();
+        shareDialog = new ShareDialog(this);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -202,5 +218,26 @@ public class actDetalleDenuncia extends AppCompatActivity  implements OnMapReady
             finish();
             startActivity(getIntent());
         }
+    }
+
+    public void compartirFacebook(View view){
+        try {
+            ivFotoDetalle.buildDrawingCache();
+            Bitmap bitmap = ivFotoDetalle.getDrawingCache();
+            SharePhoto foto=new SharePhoto.Builder().setBitmap(bitmap).build();
+            ShareContent todocontenido=new ShareMediaContent.Builder().addMedium(foto)
+                    .setShareHashtag(new ShareHashtag.Builder().setHashtag("DenunciasQVD informa sobre la denuncia realizada por: "+txtUsuarioDetalle.getText()+"\n" +
+                            "Titulo: "+txtTituloDetalle.getText()+"\n" +
+                            "Descripción: "+txtDescripcionDetalle.getText()+"\n" +
+                            "Fecha publicación: "+txtFechaDetalle.getText()+"\n" +
+                            "#MunicipioQuevedo").build())
+                    .build();
+            if(ShareDialog.canShow(SharePhotoContent.class)){
+                shareDialog.show(todocontenido);
+            }
+        }catch (Exception e){
+            //
+        }
+
     }
 }
