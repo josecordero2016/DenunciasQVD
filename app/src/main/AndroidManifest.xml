@@ -18,9 +18,9 @@
         android:name=".Clases.GlobalClass"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
         <meta-data android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
+
         <activity android:name=".actDetalleAdmin"></activity>
         <activity android:name=".actDetalleDenuncia"></activity>
 
@@ -44,7 +44,7 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <provider android:authorities="com.facebook.app.FacebookContentProvider1581665728679134"
+        <provider android:authorities="com.facebook.app.FacebookContentProvider609317103032241"
             android:name="com.facebook.FacebookContentProvider"
             android:exported="true"/>
     </application>

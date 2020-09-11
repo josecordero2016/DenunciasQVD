@@ -3,10 +3,14 @@ package com.foodi;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -32,6 +36,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -62,6 +68,7 @@ public class actDetalleDenuncia extends AppCompatActivity implements OnMapReadyC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_act_detalle_denuncia);
 
+        //ImprimirKeyHash();
        FacebookSdk.sdkInitialize(getApplicationContext());
 
         //Inicializar Facebook
@@ -127,6 +134,19 @@ public class actDetalleDenuncia extends AppCompatActivity implements OnMapReadyC
         if(!globalclass.getId_usuario_actual().equals(denuncia_selec.getIdDenuncia().getIdUsuario().getIdUsuario())){
             btnEliminarDetalle.setVisibility(View.GONE);
          //   Toast.makeText(getApplicationContext(),"Borrar",Toast.LENGTH_LONG).show();
+        }
+    }
+    private void ImprimirKeyHash() {
+        try {
+            PackageInfo info=getPackageManager().getPackageInfo("com.foodi",
+                    PackageManager.GET_SIGNATURES);
+            for(Signature signature: info.signatures){
+                MessageDigest md= MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash", android.util.Base64.encodeToString(md.digest(), android.util.Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException | NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
     }
 
@@ -245,16 +265,16 @@ public class actDetalleDenuncia extends AppCompatActivity implements OnMapReadyC
             ivFotoDetalle.buildDrawingCache();
             Bitmap bitmap = ivFotoDetalle.getDrawingCache();
             SharePhoto foto=new SharePhoto.Builder().setBitmap(bitmap).build();
-           /* ShareContent todocontenido=new ShareMediaContent.Builder().addMedium(foto)
+           ShareContent todocontenido=new ShareMediaContent.Builder().addMedium(foto)
                     .setShareHashtag(new ShareHashtag.Builder().setHashtag("DenunciasQVD informa sobre la denuncia realizada por: "+txtUsuarioDetalle.getText()+"\n" +
                             "Titulo: "+txtTituloDetalle.getText()+"\n" +
                             "Descripción: "+txtDescripcionDetalle.getText()+"\n" +
                             "Fecha publicación: "+txtFechaDetalle.getText()+"\n" +
                             "#MunicipioQuevedo").build())
-                    .build();*/
-            ShareContent todocontenido=new ShareMediaContent.Builder().addMedium(foto)
-                    .setShareHashtag(new ShareHashtag.Builder().setHashtag("DenunciasQVD informa #MunicipioQuevedo").build())
                     .build();
+            /*ShareContent todocontenido=new ShareMediaContent.Builder().addMedium(foto)
+                    .setShareHashtag(new ShareHashtag.Builder().setHashtag("DenunciasQVD informa #MunicipioQuevedo").build())
+                    .build();*/
             if(ShareDialog.canShow(SharePhotoContent.class)){
                 shareDialog.show(todocontenido);
             }
