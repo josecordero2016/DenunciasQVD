@@ -74,9 +74,9 @@ public class adtdenuncias extends RecyclerView.Adapter<adtdenuncias.ViewHolder> 
             txtNombre.setText(detalle.getIdDenuncia().getIdUsuario().getNombres()+" "+detalle.getIdDenuncia().getIdUsuario().getApellidos());
             txtFecha.setText(detalle.getIdDenuncia().getFecha());
             try{
-            byte[] byteArrray = Base64.getDecoder().decode(new String(detalle.getImagen()).getBytes("UTF-8"));
-            Bitmap bitm = BitmapFactory.decodeByteArray(byteArrray, 0, byteArrray.length);
-            ivImagen.setImageBitmap(bitm);
+                byte[] byteArrray = Base64.getDecoder().decode(new String(detalle.getImagen()).getBytes("UTF-8"));
+                Bitmap bitm = BitmapFactory.decodeByteArray(byteArrray, 0, byteArrray.length);
+                ivImagen.setImageBitmap(bitm);
             }
             catch (Exception e){}
             itemView.setOnClickListener(this);

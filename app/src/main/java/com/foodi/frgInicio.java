@@ -7,23 +7,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.foodi.Adaptadores.adt_populares;
 import com.foodi.Adaptadores.adtdenuncias;
+import com.foodi.Clases.clsConexionBd;
 import com.foodi.Interfaces.itfRetrofit;
 import com.foodi.Modelos.DetalleDenuncia;
 
-import java.nio.charset.MalformedInputException;
-import java.util.Arrays;
+import java.sql.ResultSet;
 import java.util.List;
 
 import retrofit2.Call;
@@ -71,8 +65,10 @@ public class frgInicio extends Fragment implements adtdenuncias.OnNoteListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_frg_inicio, container, false);
+        clsConexionBd con = new clsConexionBd();
+        ResultSet rs= con.consultar("select * from usuario");
         try {
-            rclPopulares = view.findViewById(R.id.rclPopulares);
+            rclPopulares = view.findViewById(R.id.rclDenunciasAdmin);
             final LinearLayoutManager linear = new LinearLayoutManager(getActivity().getApplicationContext());
             linear.setOrientation(LinearLayoutManager.VERTICAL);
             Retrofit rf = new Retrofit.Builder().baseUrl("http://" + IP_SERVIDOR + ":"+PUERTO+"/").addConverterFactory(GsonConverterFactory.create()).build();
@@ -112,7 +108,7 @@ public class frgInicio extends Fragment implements adtdenuncias.OnNoteListener {
     public void onNoteClick(int position) {
         Intent intent = new Intent(getActivity().getApplicationContext(), actDetalleDenuncia.class);
         denuncia_selec = lista.get(position);
-        Toast.makeText(getActivity().getApplicationContext(), String.valueOf(position)+"d"+denuncia_selec.toString(), Toast.LENGTH_LONG).show();
+       // Toast.makeText(getActivity().getApplicationContext(), String.valueOf(position)+"d"+denuncia_selec.toString(), Toast.LENGTH_LONG).show();
         startActivity(intent);
     }
 }

@@ -60,8 +60,8 @@ public class MainActivity extends AppCompatActivity implements Asynchtask {
         getSupportActionBar().setTitle("");
         BottomNavigationView menu_abajo = findViewById(R.id.menu_abajo);
 
-
-        Fragment selectedFragment = new frgCrear();
+//nada
+        Fragment selectedFragment = new frgInicio();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragments, selectedFragment);

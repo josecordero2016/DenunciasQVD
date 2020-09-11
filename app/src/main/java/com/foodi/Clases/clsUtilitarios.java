@@ -10,7 +10,7 @@ import java.io.ByteArrayOutputStream;
 
 public class clsUtilitarios {
 
-    public static String IP_SERVIDOR = "192.168.1.8";
+    public static String IP_SERVIDOR = "192.168.101.12";
     public static String PUERTO="8080";
     public static DetalleDenuncia denuncia_selec;
 

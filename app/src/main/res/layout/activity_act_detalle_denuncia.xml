@@ -24,6 +24,49 @@
         app:layout_constraintTop_toTopOf="@+id/toolbar"
         app:srcCompat="@drawable/letrasdqvd" />
 
+    <Button
+        android:id="@+id/btnEliminarDetalle"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/lyt_bordesredondos"
+        android:backgroundTint="#F44336"
+        android:elevation="4dp"
+        android:onClick="eliminarDenuncia"
+        android:text="    ELIMINAR DENUNCIA   "
+        android:textColor="#FFFFFF"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"></Button>
+
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu_fab_label="Compartir en Redes Sociales">
+
+
+        <com.github.clans.fab.FloatingActionButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_twitter"
+            app:fab_colorNormal="@color/twitterColor"
+            app:fab_label="Twitter"></com.github.clans.fab.FloatingActionButton>
+
+        <com.github.clans.fab.FloatingActionButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="compartirFacebook"
+            android:src="@drawable/ic_facebook"
+            app:fab_colorNormal="@color/facebookColor"
+            app:fab_label="Facebook"></com.github.clans.fab.FloatingActionButton>
+
+    </com.github.clans.fab.FloatingActionMenu>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -165,7 +208,7 @@
                     android:layout_height="42dp"
                     android:layout_below="@+id/map"
                     android:layout_alignParentStart="true"
-                    android:layout_marginStart="60dp"
+                    android:layout_marginStart="20dp"
 
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="20dp"
@@ -215,7 +258,7 @@
 
 
                 <Button
-                    android:id="@+id/btnEliminarVotoDetalle"
+                    android:id="@+id/btnRechazarA"
                     android:layout_width="wrap_content"
                     android:layout_height="42dp"
                     android:layout_below="@+id/map"
@@ -324,42 +367,14 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="340dp"
                     android:elevation="6dp"
-                    android:src="@drawable/imagenejemplo"
-                    app:civ_border_color="#FF000000"
+                    android:src="@android:drawable/sym_def_app_icon"
+                    app:civ_border_color="#2B2B2B"
                     app:civ_border_width="0dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/imageView3"
                     tools:ignore="MissingConstraints" />
-
-                <com.github.clans.fab.FloatingActionMenu
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:menu_fab_label="Compartir en Redes Sociales">
-
-
-                    <com.github.clans.fab.FloatingActionButton
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:fab_colorNormal="@color/twitterColor"
-                        android:src="@drawable/ic_twitter"
-                        app:fab_label="Twitter">
-                    </com.github.clans.fab.FloatingActionButton>
-
-                    <com.github.clans.fab.FloatingActionButton
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:fab_colorNormal="@color/facebookColor"
-                        android:src="@drawable/ic_facebook"
-                        android:onClick="compartirFacebook"
-                        app:fab_label="Facebook">
-                    </com.github.clans.fab.FloatingActionButton>
-
-                </com.github.clans.fab.FloatingActionMenu>
-
-
-
 
 
             </RelativeLayout>

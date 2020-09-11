@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,15 +39,18 @@ import java.util.Map;
 import static com.foodi.Clases.clsUtilitarios.IP_SERVIDOR;
 import static com.foodi.Clases.clsUtilitarios.PUERTO;
 import static com.foodi.Clases.clsUtilitarios.denuncia_selec;
+
 import com.foodi.WebServices.Asynchtask;
 
 import org.json.JSONException;
 
-public class actDetalleDenuncia extends AppCompatActivity  implements OnMapReadyCallback, GoogleMap.OnMapClickListener, Asynchtask{
+public class actDetalleDenuncia extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener, Asynchtask {
 
     GoogleMap Mapa;
-    TextView txtTituloDetalle,txtUsuarioDetalle, txtFechaDetalle, txtPuntajeDetalle, txtPuntajeDetalle2, txtDescripcionDetalle, txtAtendidaDetalle, txtTipoDetalle;
+    TextView txtTituloDetalle, txtUsuarioDetalle, txtFechaDetalle, txtPuntajeDetalle, txtPuntajeDetalle2, txtDescripcionDetalle, txtAtendidaDetalle, txtTipoDetalle;
     ImageView ivFotoDetalle, ivPerfilDetalle;
+    Button btnEliminarDetalle;
+
     int proceso;
     int id_denuncia;
     ShareDialog shareDialog;
@@ -58,7 +62,7 @@ public class actDetalleDenuncia extends AppCompatActivity  implements OnMapReady
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_act_detalle_denuncia);
 
-        FacebookSdk.sdkInitialize(getApplicationContext());
+       FacebookSdk.sdkInitialize(getApplicationContext());
 
         //Inicializar Facebook
         callbackManager=CallbackManager.Factory.create();
@@ -76,46 +80,53 @@ public class actDetalleDenuncia extends AppCompatActivity  implements OnMapReady
         txtTipoDetalle = findViewById(R.id.txtTipoDetalle);
         ivFotoDetalle = findViewById(R.id.ivFotoDetalle);
         ivPerfilDetalle = findViewById(R.id.ivPerfilDetalle);
-        String fecha =denuncia_selec.getIdDenuncia().getFecha();
-        fecha = fecha.substring(0,10);
+        btnEliminarDetalle = findViewById(R.id.btnEliminarDetalle);
+        String fecha = denuncia_selec.getIdDenuncia().getFecha();
+        fecha = fecha.substring(0, 10);
         id_denuncia = Integer.parseInt(denuncia_selec.getIdDenuncia().getIdDenuncia());
 
         txtTipoDetalle.setText(denuncia_selec.getIdDenuncia().getTipo());
-        txtUsuarioDetalle.setText(denuncia_selec.getIdDenuncia().getIdUsuario().getNombres()+" "+denuncia_selec.getIdDenuncia().getIdUsuario().getApellidos());
+        txtUsuarioDetalle.setText(denuncia_selec.getIdDenuncia().getIdUsuario().getNombres() + " " + denuncia_selec.getIdDenuncia().getIdUsuario().getApellidos());
         txtFechaDetalle.setText(fecha);
         txtAtendidaDetalle.setText(denuncia_selec.getIdDenuncia().getAtendida());
         txtDescripcionDetalle.setText(denuncia_selec.getIdDenuncia().getDetalles());
         txtTituloDetalle.setText(denuncia_selec.getIdDenuncia().getTitulo());
-        if(denuncia_selec.getImagen()!= null){
-        try {
-            byte[] byteArrray = new byte[0];
-            byteArrray = Base64.getDecoder().decode(new String(denuncia_selec.getImagen()).getBytes("UTF-8"));
-            Bitmap bitm = BitmapFactory.decodeByteArray(byteArrray, 0, byteArrray.length);
-            ivFotoDetalle.setImageBitmap(bitm);
-            byteArrray = new byte[0];
-            byteArrray = Base64.getDecoder().decode(new String(denuncia_selec.getIdDenuncia().getIdUsuario().getImagen()).getBytes("UTF-8"));
-            bitm = BitmapFactory.decodeByteArray(byteArrray, 0, byteArrray.length);
-            ivPerfilDetalle.setImageBitmap(bitm);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+        if (denuncia_selec.getImagen() != null) {
+            try {
+                byte[] byteArrray = new byte[0];
+                byteArrray = Base64.getDecoder().decode(new String(denuncia_selec.getImagen()).getBytes("UTF-8"));
+                Bitmap bitm = BitmapFactory.decodeByteArray(byteArrray, 0, byteArrray.length);
+                ivFotoDetalle.setImageBitmap(bitm);
+                if (denuncia_selec.getIdDenuncia().getIdUsuario().getImagen() != null) {
+                    byteArrray = new byte[0];
+                    byteArrray = Base64.getDecoder().decode(new String(denuncia_selec.getIdDenuncia().getIdUsuario().getImagen()).getBytes("UTF-8"));
+                    bitm = BitmapFactory.decodeByteArray(byteArrray, 0, byteArrray.length);
+                    ivPerfilDetalle.setImageBitmap(bitm);
+                }
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
         }
 
 
         //Carga de los puntajes
         Map<String, String> map = new LinkedHashMap<>();
-        try
-        {
-            map.put("sentencia", "select consultar_puntos('"+id_denuncia+"')");
-            SOAPWork dd = new SOAPWork("http://"+IP_SERVIDOR+":"+PUERTO+"/Denunciasqvd_srv/ws_Procesar?WSDL", map, this, this);
+        try {
+            map.put("sentencia", "select consultar_puntos('" + id_denuncia + "')");
+            SOAPWork dd = new SOAPWork("http://" + IP_SERVIDOR + ":" + PUERTO + "/Denunciasqvd_srv/ws_Procesar?WSDL", map, this, this);
             dd.setMethod_name("consultar");
             dd.execute();
             proceso = 1;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(getApplicationContext(), "Error, "+e.toString(),Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Error, " + e.toString(), Toast.LENGTH_LONG).show();
+        }
+        GlobalClass globalclass = (GlobalClass) getApplicationContext();
+
+       // Toast.makeText(getApplicationContext(),globalclass.getId_usuario_actual()+" "+denuncia_selec.getIdDenuncia().getIdUsuario().getIdUsuario(),Toast.LENGTH_LONG).show();
+        if(!globalclass.getId_usuario_actual().equals(denuncia_selec.getIdDenuncia().getIdUsuario().getIdUsuario())){
+            btnEliminarDetalle.setVisibility(View.GONE);
+         //   Toast.makeText(getApplicationContext(),"Borrar",Toast.LENGTH_LONG).show();
         }
     }
 
@@ -140,71 +151,77 @@ public class actDetalleDenuncia extends AppCompatActivity  implements OnMapReady
         //Mapa.addMarker(new MarkerOptions().position(new LatLng(-1.012934, -79.469373)).title("Facultad de Ciencias Agrarias"));
     }
 
-    public void cambiarVista(View view){
-        if(Mapa.getMapType()==GoogleMap.MAP_TYPE_NORMAL){
+    public void cambiarVista(View view) {
+        if (Mapa.getMapType() == GoogleMap.MAP_TYPE_NORMAL) {
             Mapa.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-        }
-        else{
+        } else {
             Mapa.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         }
     }
 
     public void votarReal(View view) {
         Map<String, String> map = new LinkedHashMap<>();
-        try
-        {
-            GlobalClass globalclass=(GlobalClass)getApplicationContext();
+        try {
+            GlobalClass globalclass = (GlobalClass) getApplicationContext();
 
-            map.put("sentencia", "select ejecutar_puntaje('"+id_denuncia+"','"+ globalclass.getId_usuario_actual()+"','SI')");
-            SOAPWork dd = new SOAPWork("http://"+IP_SERVIDOR+":8080/Denunciasqvd_srv/ws_Procesar?WSDL", map, this, this);
+
+            map.put("sentencia", "select ejecutar_puntaje('" + id_denuncia + "','" + globalclass.getId_usuario_actual() + "','SI')");
+            SOAPWork dd = new SOAPWork("http://" + IP_SERVIDOR + ":8080/Denunciasqvd_srv/ws_Procesar?WSDL", map, this, this);
             dd.setMethod_name("procesar");
             dd.execute();
             proceso = 1;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(getApplicationContext(), "Error, "+e.toString(),Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Error, " + e.toString(), Toast.LENGTH_LONG).show();
         }
         proceso = 2;
     }
 
-    public void votarFalso(View view){
+    public void votarFalso(View view) {
 
         Map<String, String> map = new LinkedHashMap<>();
-        try
-        {
-            GlobalClass globalclass=(GlobalClass)getApplicationContext();
-            map.put("sentencia", "select ejecutar_puntaje('"+id_denuncia+"','"+ globalclass.getId_usuario_actual()+"','NO')");
-            SOAPWork dd = new SOAPWork("http://"+IP_SERVIDOR+":8080/Denunciasqvd_srv/ws_Procesar?WSDL", map, this, this);
+        try {
+            GlobalClass globalclass = (GlobalClass) getApplicationContext();
+            map.put("sentencia", "select ejecutar_puntaje('" + id_denuncia + "','" + globalclass.getId_usuario_actual() + "','NO')");
+            SOAPWork dd = new SOAPWork("http://" + IP_SERVIDOR + ":8080/Denunciasqvd_srv/ws_Procesar?WSDL", map, this, this);
             dd.setMethod_name("procesar");
             dd.execute();
             proceso = 1;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(getApplicationContext(), "Error, "+e.toString(),Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Error, " + e.toString(), Toast.LENGTH_LONG).show();
         }
         proceso = 2;
     }
 
-    public void eliminarVoto(View view){
+    public void eliminarVoto(View view) {
         Map<String, String> map = new LinkedHashMap<>();
-        try
-        {
-            GlobalClass globalclass=(GlobalClass)getApplicationContext();
-            map.put("sentencia", "DELETE from ratificaciones where id_usuario = '"+globalclass.getId_usuario_actual()+"' and id_denuncia = '"+id_denuncia+"'");
-            SOAPWork dd = new SOAPWork("http://"+IP_SERVIDOR+":8080/Denunciasqvd_srv/ws_Procesar?WSDL", map, this, this);
+        try {
+            GlobalClass globalclass = (GlobalClass) getApplicationContext();
+            map.put("sentencia", "DELETE from ratificaciones where id_usuario = '" + globalclass.getId_usuario_actual() + "' and id_denuncia = '" + id_denuncia + "'");
+            SOAPWork dd = new SOAPWork("http://" + IP_SERVIDOR + ":8080/Denunciasqvd_srv/ws_Procesar?WSDL", map, this, this);
             dd.setMethod_name("procesar");
             dd.execute();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(getApplicationContext(), "Error, "+e.toString(),Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Error, " + e.toString(), Toast.LENGTH_LONG).show();
         }
         proceso = 2;
+    }
+
+    public void eliminarDenuncia(View view){
+        Map<String, String> map = new LinkedHashMap<>();
+        try {
+            GlobalClass globalclass = (GlobalClass) getApplicationContext();
+            map.put("sentencia", "select eliminar_denuncia('"+id_denuncia+"')");
+            SOAPWork dd = new SOAPWork("http://" + IP_SERVIDOR + ":8080/Denunciasqvd_srv/ws_Procesar?WSDL", map, this, this);
+            dd.setMethod_name("procesar");
+            dd.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "Error, " + e.toString(), Toast.LENGTH_LONG).show();
+        }
+        proceso = 3;
     }
 
     @Override
@@ -214,9 +231,12 @@ public class actDetalleDenuncia extends AppCompatActivity  implements OnMapReady
             txtPuntajeDetalle.setText(resultados[0]);
             txtPuntajeDetalle2.setText(resultados[1]);
         }
-        if(proceso == 2){
+        if (proceso == 2) {
             finish();
             startActivity(getIntent());
+        }
+        if (proceso == 3) {
+            finish();
         }
     }
 
@@ -225,12 +245,15 @@ public class actDetalleDenuncia extends AppCompatActivity  implements OnMapReady
             ivFotoDetalle.buildDrawingCache();
             Bitmap bitmap = ivFotoDetalle.getDrawingCache();
             SharePhoto foto=new SharePhoto.Builder().setBitmap(bitmap).build();
-            ShareContent todocontenido=new ShareMediaContent.Builder().addMedium(foto)
+           /* ShareContent todocontenido=new ShareMediaContent.Builder().addMedium(foto)
                     .setShareHashtag(new ShareHashtag.Builder().setHashtag("DenunciasQVD informa sobre la denuncia realizada por: "+txtUsuarioDetalle.getText()+"\n" +
                             "Titulo: "+txtTituloDetalle.getText()+"\n" +
                             "Descripción: "+txtDescripcionDetalle.getText()+"\n" +
                             "Fecha publicación: "+txtFechaDetalle.getText()+"\n" +
                             "#MunicipioQuevedo").build())
+                    .build();*/
+            ShareContent todocontenido=new ShareMediaContent.Builder().addMedium(foto)
+                    .setShareHashtag(new ShareHashtag.Builder().setHashtag("DenunciasQVD informa #MunicipioQuevedo").build())
                     .build();
             if(ShareDialog.canShow(SharePhotoContent.class)){
                 shareDialog.show(todocontenido);

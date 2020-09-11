@@ -164,7 +164,7 @@ public class LoginActivity extends AppCompatActivity implements Asynchtask {
 
     private void ImprimirKeyHash() {
         try {
-            PackageInfo info=getPackageManager().getPackageInfo("com.example.pruebacomp",
+            PackageInfo info=getPackageManager().getPackageInfo("com.foodi",
                     PackageManager.GET_SIGNATURES);
             for(Signature signature: info.signatures){
                 MessageDigest md= MessageDigest.getInstance("SHA");
