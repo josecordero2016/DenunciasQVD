@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -27,6 +28,8 @@ import android.widget.Toast;
 import com.foodi.Clases.GlobalClass;
 import com.foodi.Clases.clsConexionBd;
 import com.foodi.Clases.clsUtilitarios;
+import com.foodi.Interfaces.itfRetrofit;
+import com.foodi.Modelos.Usuario;
 import com.foodi.WSSoap.SOAPWork;
 import com.foodi.WebServices.Asynchtask;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -36,8 +39,19 @@ import org.json.JSONException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import static com.foodi.Clases.clsUtilitarios.IP_SERVIDOR;
+import static com.foodi.Clases.clsUtilitarios.PUERTO;
 
 
 public class MainActivity extends AppCompatActivity implements Asynchtask {
@@ -47,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements Asynchtask {
     private int banSubirImgDecuncia = 0;
     Uri imageUri;
     ImageView imageviewU;
+    List<Usuario> lista;
 
 
     @Override
@@ -124,12 +139,12 @@ public class MainActivity extends AppCompatActivity implements Asynchtask {
     }
 
     public void registrarDenuncia(View view) {
-        GlobalClass globalclass = (GlobalClass) getApplicationContext();
+        final GlobalClass globalclass = (GlobalClass) getApplicationContext();
         EditText txtTituloDenun = findViewById(R.id.txtTitulo);
         EditText txtDetalleDenun = findViewById(R.id.txtDetalle);
         Spinner spTipoDenuncia = findViewById(R.id.spTipoDenuncia);
-        EditText txtLatDenun = findViewById(R.id.txtLat);
-        EditText txtLonDenun = findViewById(R.id.txtLon);
+        final EditText txtLatDenun = findViewById(R.id.txtLat);
+        final EditText txtLonDenun = findViewById(R.id.txtLon);
         ImageView imgDenuncia = findViewById(R.id.btnBuscarImagen);
 
         clsUtilitarios utili = new clsUtilitarios();
@@ -137,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements Asynchtask {
             //A ingresado todos los datos
             String query = "select sp_registrar_denuncia(?,?,?,?,?,?,?)";
             byte[] imagenDenuncia = utili.imagenAbyte(imgDenuncia);
-            clsConexionBd con = new clsConexionBd();
+            final clsConexionBd con = new clsConexionBd();
             PreparedStatement ps = null;
             try {
                 ps = con.connection.prepareStatement(query);
@@ -148,12 +163,62 @@ public class MainActivity extends AppCompatActivity implements Asynchtask {
                 ps.setString(5, txtLonDenun.getText().toString());
                 ps.setString(6, spTipoDenuncia.getSelectedItem().toString());
                 ps.setBytes(7, imagenDenuncia);
-                con.ejecutarPs(ps);
+                final String mensaje= con.ejecutarPs_mensaje(ps);
+
+                ps.close();
+                con.cerrarConexion();
                 Toast.makeText(getApplicationContext(), "Datos Actualizados", Toast.LENGTH_LONG).show();
                 txtTituloDenun.setText("");
                 txtDetalleDenun.setText("");
                 imgDenuncia.setImageDrawable(getDrawable(R.drawable.ic_add_photo));
                 banSubirImgDecuncia = 0;
+
+                //realizar notificaciones
+                try {
+                    //rclPopulares = view.findViewById(R.id.rclDenunciasAdmin);
+                    final LinearLayoutManager linear = new LinearLayoutManager(getApplicationContext());
+                    linear.setOrientation(LinearLayoutManager.VERTICAL);
+                    Retrofit rf = new Retrofit.Builder().baseUrl("http://" + IP_SERVIDOR + ":" + PUERTO + "/").addConverterFactory(GsonConverterFactory.create()).build();
+                    itfRetrofit retrofit_interfaz = rf.create(itfRetrofit.class);
+                    Call<List<Usuario>> call = retrofit_interfaz.getUsuario();
+                    call.enqueue(new Callback<List<Usuario>>() {
+                        @Override
+                        public void onResponse(Call<List<Usuario>> call, Response<List<Usuario>> response) {
+                            //Codigo de respuesta a la petición realizada
+                            String cod_respuesta = "Código " + response.code();
+                            //Definiendo donde se guardaran los valores obtenidos
+                            String valores = "";
+                            try {
+                                lista = response.body();
+                                final List<Usuario> finalLista = lista;
+
+                                String query = "select sp_registrar_notificaion(?,?)";
+                                clsConexionBd con = new clsConexionBd();
+                                for (int i = 0; i < finalLista.size(); i++) {
+                                    if(ditanceBetwen(Double.parseDouble(txtLatDenun.getText().toString()), Double.parseDouble(txtLonDenun.getText().toString()), finalLista.get(i)))
+                                    {
+                                        PreparedStatement ps = con.connection.prepareStatement(query);
+                                        ps.setInt(1, Integer.parseInt(globalclass.getId_usuario_actual()));
+                                        ps.setInt(2, Integer.parseInt(mensaje));
+                                        con.ejecutarPs(ps);
+                                        ps.close();
+                                    }
+                                }
+                                con.cerrarConexion();
+                            } catch (Exception e) {
+                                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<List<Usuario>> call, Throwable t) {
+                            Toast.makeText(getApplicationContext(), "No se ha podido establecer conexión con el servidor " + t.toString(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -239,11 +304,17 @@ public class MainActivity extends AppCompatActivity implements Asynchtask {
         startActivityForResult(Intent.createChooser(galeria, "Sellect Picture"), 2);
     }
 
-    public void ditanceBetwen(View view)
-    {
-        float [] results = new float[5];
-        Location.distanceBetween(-1.024948, -79.454385, -1.023320, -79.448889, results);
-        Toast.makeText(view.getContext(), results[0]+"", Toast.LENGTH_LONG).show();
+    public Boolean ditanceBetwen(Double latitudDenunciaNotifi, Double longitudDenunciaNotifi, Usuario userNotificar) {
+        float[] results = new float[5];
+        //cerca de casa
+        Location.distanceBetween(Double.parseDouble(userNotificar.getLatitudHogar()), Double.parseDouble(userNotificar.getLongitudHogar()), latitudDenunciaNotifi, longitudDenunciaNotifi, results);
+        if (results[0] <= 1000)
+            return true;
+        //cerca de ubicacion actual
+        Location.distanceBetween(Double.parseDouble(userNotificar.getLatitudActual()), Double.parseDouble(userNotificar.getLongitudActual()), latitudDenunciaNotifi, longitudDenunciaNotifi, results);
+        if (results[0] <= 1000)
+            return true;
+        return false;
     }
 
     @Override
