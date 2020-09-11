@@ -102,7 +102,7 @@
 
             <ImageView
                 android:id="@+id/ivImagen"
-                android:layout_width="230dp"
+                android:layout_width="190dp"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:src="@drawable/imagenejemplo" />

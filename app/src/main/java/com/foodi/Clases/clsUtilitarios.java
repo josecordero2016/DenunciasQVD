@@ -10,8 +10,8 @@ import java.io.ByteArrayOutputStream;
 
 public class clsUtilitarios {
 
-    public static String IP_SERVIDOR = "192.168.100.111";
-    public static String PUERTO="18609";
+    public static String IP_SERVIDOR = "192.168.1.8";
+    public static String PUERTO="8080";
     public static DetalleDenuncia denuncia_selec;
 
     public byte[] imagenAbyte(ImageView imageView){
