@@ -19,105 +19,95 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:foregroundTint="#834B4B">
 
 
             <TextView
-                android:id="@+id/dfsfsdf2"
-                android:layout_width="165dp"
+                android:id="@+id/txtFecha"
+                android:layout_width="174dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
+                android:layout_below="@+id/txtNombre"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="62dp"
-                android:layout_marginEnd="6dp"
+                android:layout_marginTop="13dp"
+                android:layout_marginEnd="23dp"
                 android:text="23/09/2020"
                 android:textAlignment="textStart"
                 android:textColor="#FF676767"
                 android:textSize="12sp" />
 
-            <ImageView
-                android:layout_width="167dp"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/imagenejemplo" />
+            <TextView
+                android:id="@+id/txtTipo"
+                android:layout_width="159dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtTitulo"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="13dp"
+                android:layout_marginEnd="22dp"
+                android:text="Daño de luminaria"
+                android:textAlignment="textStart"
+                android:textColor="@color/colorNaranja"
+                android:textSize="12sp" />
 
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="14dp"
                 android:layout_height="14dp"
+                android:layout_below="@+id/txtTitulo"
                 android:layout_marginStart="230dp"
-                android:layout_marginTop="29dp"
-                android:layout_marginEnd="4dp"
-                android:layout_toStartOf="@+id/txtNombrerestaurante"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="3dp"
+                android:layout_toStartOf="@+id/txtTipo"
                 android:scaleType="centerCrop"
-                android:src="@drawable/icon_location" />
+                android:src="@drawable/icon_tipo"
+                app:tint="@color/colorAccent" />
 
             <TextView
-                android:id="@+id/txtNombrerestaurante"
-                android:layout_width="147dp"
+                android:id="@+id/txtTitulo"
+                android:layout_width="176dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="28dp"
-                android:layout_marginEnd="6dp"
-                android:text="Centro"
+                android:layout_marginTop="27dp"
+                android:layout_marginEnd="23dp"
+                android:text="Luminaria dañada"
                 android:textAlignment="textStart"
-                android:textColor="@color/colorNaranja"
-                android:textSize="12sp" />
-
-
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="14dp"
-                android:layout_height="14dp"
-                android:layout_marginStart="230dp"
-                android:layout_marginTop="46dp"
-                android:layout_marginEnd="4dp"
-                android:layout_toStartOf="@+id/dfsfsdf"
-                android:scaleType="centerCrop"
-                android:src="@drawable/icon_usuario"
-                android:tint="#676767" />
+                android:textColor="#2E2E2E" />
 
             <TextView
-                android:id="@+id/dfsfsdf"
-                android:layout_width="147dp"
+                android:id="@+id/txtNombre"
+                android:layout_width="159dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
+                android:layout_below="@+id/txtTipo"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="45dp"
-                android:layout_marginEnd="6dp"
+                android:layout_marginTop="13dp"
+                android:layout_marginEnd="22dp"
                 android:text="Carlos Tejeda"
                 android:textAlignment="textStart"
                 android:textColor="#FF676767"
                 android:textSize="12sp" />
 
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_below="@+id/txtTipo"
+                android:layout_marginStart="230dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="3dp"
+                android:layout_toStartOf="@+id/txtNombre"
+                android:scaleType="centerCrop"
+                android:src="@drawable/icon_usuario"
+                app:tint="#676767" />
 
-            <TextView
-                android:id="@+id/txtNombrePlatillo"
-                android:layout_width="162dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="7dp"
-                android:layout_marginEnd="7dp"
-                android:text="Luminaria dañada"
-                android:textAlignment="textStart"
-                android:textColor="#2E2E2E" />
+            <ImageView
+                android:id="@+id/ivImagen"
+                android:layout_width="230dp"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/imagenejemplo" />
 
-            <Button
-                android:id="@+id/btnRestaurant"
-                android:layout_width="145dp"
-                android:layout_height="26dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="239dp"
-                android:layout_marginTop="137dp"
-                android:layout_marginEnd="18dp"
-                android:background="@drawable/lyt_bordesredondos"
-                android:backgroundTint="@color/colorNaranja"
-                android:text="DETALLES"
-                android:textColor="#FFFFFF" />
+
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>

@@ -55,11 +55,11 @@ public class LoginActivity extends AppCompatActivity implements Asynchtask {
         permisos.add(Manifest.permission.ACCESS_FINE_LOCATION);
         getPermission(permisos);
 
-        Intent galeria = new Intent();
+        /*Intent galeria = new Intent();
         galeria.setType("image/*");
         galeria.setAction(Intent.ACTION_GET_CONTENT);
 
-        startActivityForResult(Intent.createChooser(galeria, "Sellect Picture"), PICK_IMAGE);
+        startActivityForResult(Intent.createChooser(galeria, "Sellect Picture"), PICK_IMAGE);*/
     }
 
     public void getPermission(ArrayList<String> permisosSolicitados){

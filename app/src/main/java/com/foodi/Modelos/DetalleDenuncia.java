@@ -4,13 +4,14 @@ public class DetalleDenuncia {
 
     private Denuncia idDenuncia;
     private String idDetalleDenuncia;
-    private byte[] imagen;
+    private String imagen;
 
     public class Denuncia{
-        private String detalles, fecha, idDenuncia, latitud, longitud, tipo, titulo;
+        private String atendida, detalles, fecha, idDenuncia, latitud, longitud, tipo, titulo;
         private Usuario idUsuario;
 
-        public Denuncia(String detalles, String fecha, String idDenuncia, String latitud, String longitud, String tipo, String titulo, Usuario idUsuario) {
+        public Denuncia(String atendida, String detalles, String fecha, String idDenuncia, String latitud, String longitud, String tipo, String titulo, Usuario idUsuario) {
+            this.atendida = atendida;
             this.detalles = detalles;
             this.fecha = fecha;
             this.idDenuncia = idDenuncia;
@@ -19,6 +20,14 @@ public class DetalleDenuncia {
             this.tipo = tipo;
             this.titulo = titulo;
             this.idUsuario = idUsuario;
+        }
+
+        public String getAtendida() {
+            return atendida;
+        }
+
+        public void setAtendida(String atendida) {
+            this.atendida = atendida;
         }
 
         public String getDetalles() {
@@ -86,10 +95,10 @@ public class DetalleDenuncia {
         }
 
         public class Usuario{
-            private String nombres, apellidos, telefono, latitudActual, longitudActual, nombreUsuario, tipo, idUsuario;
-            private byte[] imagen;
+            private String nombres, apellidos, telefono, latitudActual, longitudActual, nombreUsuario, tipo, idUsuario, imagen;
 
-            public Usuario(String nombres, String apellidos, String telefono, String latitudActual, String longitudActual, String nombreUsuario, String tipo, String idUsuario, byte[] imagen) {
+
+            public Usuario(String nombres, String apellidos, String telefono, String latitudActual, String longitudActual, String nombreUsuario, String tipo, String idUsuario, String imagen) {
                 this.nombres = nombres;
                 this.apellidos = apellidos;
                 this.telefono = telefono;
@@ -98,6 +107,14 @@ public class DetalleDenuncia {
                 this.nombreUsuario = nombreUsuario;
                 this.tipo = tipo;
                 this.idUsuario = idUsuario;
+                this.imagen = imagen;
+            }
+
+            public String getImagen() {
+                return imagen;
+            }
+
+            public void setImagen(String imagen) {
                 this.imagen = imagen;
             }
 
@@ -164,21 +181,10 @@ public class DetalleDenuncia {
             public void setIdUsuario(String idUsuario) {
                 this.idUsuario = idUsuario;
             }
-
-            public byte[] getImagen() {
-                return imagen;
-            }
-
-            public void setImagen(byte[] imagen) {
-                this.imagen = imagen;
-            }
         }
-
-
     }
 
-
-    public DetalleDenuncia(Denuncia idDenuncia, String idDetalleDenuncia, byte[] imagen) {
+    public DetalleDenuncia(Denuncia idDenuncia, String idDetalleDenuncia, String imagen) {
         this.idDenuncia = idDenuncia;
         this.idDetalleDenuncia = idDetalleDenuncia;
         this.imagen = imagen;
@@ -200,11 +206,11 @@ public class DetalleDenuncia {
         this.idDetalleDenuncia = idDetalleDenuncia;
     }
 
-    public byte[] getImagen() {
+    public String getImagen() {
         return imagen;
     }
 
-    public void setImagen(byte[] imagen) {
+    public void setImagen(String imagen) {
         this.imagen = imagen;
     }
 }

@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:elevation="3dp"
     tools:context=".actDetalleDenuncia">
 
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar"></include>
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="130dp"
@@ -34,7 +36,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -43,33 +46,81 @@
                     android:id="@+id/ivFotoDetalle"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:elevation="1dp"
                     android:scaleType="fitXY"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                    android:src="@drawable/imagenejemplo"
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
                     android:id="@+id/txtTituloDetalle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/ivFotoDetalle"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="310dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
-                    android:textColor="#252525"
+                    android:textColor="#000000"
                     android:textSize="16dp"
                     android:textStyle="bold"
-                    tools:text="Soy un título" ></TextView>
+                    android:text="Soy un título" />
 
                 <TextView
                     android:id="@+id/txt2"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="400dp"
+                    android:layout_marginTop="394dp"
                     android:layout_marginEnd="10dp"
+                    android:text="Descripción:"
                     android:textColor="#252525"
                     android:textSize="16dp"
-                    android:textStyle="bold"
-                    tools:text="Descripción:" ></TextView>
+                    android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:id="@+id/txtTipoDetalle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtDescripcionDetalle"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toEndOf="@+id/im3a"
+                    android:text="Descripción:"
+                    android:textColor="@color/colorAzulBonito"
+                    android:textSize="16dp"
+                    android:textStyle="bold"></TextView>
+
+                <ImageView
+                    android:id="@+id/im3a"
+                    android:layout_width="17dp"
+                    android:layout_height="20dp"
+                    android:layout_below="@+id/txtDescripcionDetalle"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="11dp"
+                    android:elevation="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.016"
+                    app:srcCompat="@drawable/icon_tipo"
+                    app:tint="@color/colorAzulBonito" />
+
+
+
+                <TextView
+                    android:id="@+id/txtAtentidaDetalle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ima"
+                    android:layout_alignStart="@+id/txtPuntajeDetalle"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="7dp"
+                    android:text="Atendida"
+                    android:textColor="#252525"
+                    android:textSize="16dp"
+                    android:textStyle="bold"></TextView>
 
                 <TextView
                     android:id="@+id/txtDescripcionDetalle"
@@ -80,22 +131,105 @@
                     android:layout_marginEnd="10dp"
                     android:textColor="#6A6A6A"
                     android:textSize="16dp"
-                    tools:text="Claro que todo esta mal por aqui no hay nada que valga, rayos que estres tener que lidiar con esta pipol que no arregla nada"></TextView>
+                    android:text="Claro que todo esta mal por aqui no hay nada que valga, rayos que estres tener que lidiar con esta pipol que no arregla nada"></TextView>
 
 
                 <TextView
                     android:id="@+id/txt3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/txtDescripcionDetalle"
+                    android:layout_below="@+id/txtTipoDetalle"
 
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
+                    android:text="Ubicación:"
                     android:textColor="#252525"
                     android:textSize="16dp"
-                    android:textStyle="bold"
-                    tools:text="Ubicación:"></TextView>
+                    android:textStyle="bold"></TextView>
+
+
+                <fragment
+                    android:id="@+id/map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_below="@+id/txt3"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_marginTop="10dp"
+                    tools:context=".MainActivity" />
+
+
+                <Button
+                    android:id="@+id/btnRealDetalle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:layout_below="@+id/map"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="60dp"
+
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/lyt_bordesredondos"
+
+                    android:backgroundTint="@color/colorNaranja"
+                    android:onClick="votarReal"
+                    android:text="ES REAL"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16dp"
+                    app:layout_constraintStart_toStartOf="@id/map" />
+
+                <Button
+                    android:id="@+id/btnCambiarVistaDetalle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+
+                    android:layout_alignTop="@+id/map"
+                    android:layout_marginStart="10dp"
+
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/lyt_bordesredondos"
+                    android:backgroundTint="#DFDFDF"
+                    android:onClick="cambiarVista"
+                    android:text="VISTA"
+                    android:textColor="#515151"
+                    android:textSize="16dp"
+                    app:layout_constraintStart_toStartOf="@id/map" />
+
+                <Button
+                    android:id="@+id/btnFalsoDetalle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:layout_below="@+id/map"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_toEndOf="@+id/btnRealDetalle"
+                    android:background="@drawable/lyt_bordesredondos"
+                    android:backgroundTint="@color/colorNaranja"
+                    android:onClick="votarFalso"
+                    android:text="ES FALSO"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16dp"
+                    app:layout_constraintStart_toStartOf="@id/map" />
+
+
+                <Button
+                    android:id="@+id/btnEliminarVotoDetalle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:layout_below="@+id/map"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_toEndOf="@+id/btnFalsoDetalle"
+                    android:background="@drawable/lyt_bordesredondos"
+                    android:backgroundTint="#F44336"
+                    android:onClick="eliminarVoto"
+                    android:text="   ELIMINAR VOTO   "
+                    android:textColor="#FFFFFF"
+                    android:textSize="16dp"
+                    app:layout_constraintStart_toStartOf="@id/map" />
 
                 <TextView
                     android:id="@+id/txt"
@@ -104,21 +238,58 @@
                     android:layout_marginStart="290dp"
                     android:layout_marginTop="340dp"
                     android:layout_marginEnd="10dp"
+                    android:text="Puntajes:"
                     android:textColor="#252525"
                     android:textSize="16dp"
-                    android:textStyle="bold"
-                    tools:text="Puntaje:" ></TextView>
+                    android:textStyle="bold"></TextView>
 
                 <TextView
                     android:id="@+id/txtPuntajeDetalle"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="290dp"
                     android:layout_marginTop="365dp"
-                    android:layout_marginEnd="10dp"
-                    android:textColor="#6A6A6A"
-                    android:textSize="16dp"
-                    tools:text="703"></TextView>
+                    android:layout_marginEnd="2dp"
+                    android:text="703"
+                    android:textColor="@color/colorAzulBonito"
+                    android:textSize="16dp"></TextView>
+
+                <ImageView
+                    android:id="@+id/ima"
+                    android:layout_width="17dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="366dp"
+                    android:layout_toEndOf="@+id/txtPuntajeDetalle"
+                    android:elevation="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.016"
+                    app:srcCompat="@drawable/icon_real"
+                    app:tint="@color/colorAzulBonito" />
+
+                <ImageView
+                    android:id="@+id/ima25"
+                    android:layout_width="17dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="366dp"
+                    android:layout_toEndOf="@+id/txtPuntajeDetalle2"
+                    android:elevation="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.016"
+                    app:srcCompat="@drawable/icon_falso"
+                    app:tint="#F44336" />
+
+                <TextView
+                    android:id="@+id/txtPuntajeDetalle2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="350dp"
+                    android:layout_marginTop="365dp"
+                    android:layout_marginEnd="2dp"
+                    android:text="703"
+                    android:textColor="#F44336"
+                    android:textSize="16dp"></TextView>
 
                 <TextView
                     android:id="@+id/txtUsuarioDetalle"
@@ -130,7 +301,7 @@
                     android:textColor="#6A6A6A"
                     android:textSize="16dp"
                     android:textStyle="bold"
-                    tools:text="Carlos Marin"></TextView>
+                    android:text="Carlos Marin"></TextView>
 
                 <TextView
                     android:id="@+id/txtFechaDetalle"
@@ -139,18 +310,29 @@
                     android:layout_marginStart="70dp"
                     android:layout_marginTop="365dp"
                     android:layout_marginEnd="10dp"
+                    android:elevation="5dp"
                     android:textColor="#6A6A6A"
                     android:textSize="16dp"
-                    tools:text="17/09/2020"></TextView>
 
-                <ImageView
-                    android:id="@+id/imageView5"
+                    android:text="17/09/2020"></TextView>
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivPerfilDetalle"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="340dp"
-                    android:scaleType="fitXY"
-                    app:srcCompat="@drawable/imagenejemplo" />
+                    android:elevation="6dp"
+                    android:src="@drawable/imagenejemplo"
+                    app:civ_border_color="#FF000000"
+                    app:civ_border_width="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/imageView3"
+                    tools:ignore="MissingConstraints" />
+
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>
